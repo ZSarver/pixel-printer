@@ -11,10 +11,10 @@ version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/pixel-printer#readme>
 homepage:       https://github.com/githubuser/pixel-printer#readme
 bug-reports:    https://github.com/githubuser/pixel-printer/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2021 Author name here
-license:        BSD3
+author:         Zachary Sarver
+maintainer:     Zachary.Sarver@gmail.com
+copyright:      2021 Zachary Sarver
+license:        GPLv3
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
@@ -33,7 +33,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      base >=4.7 && <5,
+      JuicyPixels >= 3.3 && < 3.4
   default-language: Haskell2010
 
 executable pixel-printer-exe
