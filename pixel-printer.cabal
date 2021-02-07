@@ -7,7 +7,7 @@ cabal-version: 1.12
 -- hash: 7dde5246e251bb28682e5cf335c48523a71ce2fe127731720b534886f4e6367e
 
 name:           pixel-printer
-version:        0.0.0.0
+version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/pixel-printer#readme>
 homepage:       https://github.com/githubuser/pixel-printer#readme
 bug-reports:    https://github.com/githubuser/pixel-printer/issues

@@ -2,9 +2,9 @@ name:                pixel-printer
 version:             0.1.0.0
 github:              "githubuser/pixel-printer"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2021 Author name here"
+author:              "Zachary Sarver"
+maintainer:          "Zachary.Sarver@gmail.com"
+copyright:           "2021 Zachary Sarver"
 
 extra-source-files:
 - README.md
@@ -21,6 +21,8 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- JuicyPixels >= 3.3 && < 3.4
+- lens >= 4.19 && < 5
 
 library:
   source-dirs: src

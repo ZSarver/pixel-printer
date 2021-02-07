@@ -11,12 +11,16 @@ Any filetype supported by
 [JuicyPixels](https://hackage.haskell.org/package/JuicyPixels) will work.
 
 ## Roadmap
-- [ ] v0.1 - Reads file given on command line, outputs .scad code to stdout.
+- [x] v0.1 - Reads file given on command line, outputs .scad code to stdout.
       Height, width, length predefined
 - [ ] v0.2 - Command line options for:
-    - [ ] pixel width, pixel width, mutally exclusive with
-    - [ ] total width, total width
+    - [ ] invert height
+    - [ ] pixel width, pixel length, mutally exclusive with
+    - [ ] total width, total length
     - [ ] height
     - [ ] output to a file
 - [ ] v0.3 - stl output
+    - [ ] ascii
+    - [ ] binary
 - [ ] v1.0 - same height pixel output, useful for painting the final product
+    - [ ] paint by pixels
