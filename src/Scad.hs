@@ -4,12 +4,17 @@ module Scad
 
 import Geometry (Geometry(..))
 
-scadify :: Geometry -> String
-scadify (Transform x y z g) = "transform([" <> show x
+scadifyGeometry :: Geometry -> String
+scadifyGeometry (Transform x y z g) = "translate([" <> show x
                               <> "," <> show y
                               <> "," <> show z
-                              <> "]) \n" <> scadify g <> "\n"
-scadify (Cube width depth height) = "cube([" <> show width
+                              <> "]) \n" <> scadifyGeometry g <> "\n"
+scadifyGeometry (Cube width depth height) = "cube([" <> show width
                                     <> "," <> show depth
                                     <> "," <> show height
                                     <> "]);"
+scadifyGeometry Empty = ""
+
+scadify :: [Geometry] -> String
+scadify image = "union() {\n" <> scadify' <> "};"
+  where scadify' = (foldr (<>) "") . (map scadifyGeometry) $ image

@@ -3,7 +3,7 @@ module Geometry
     Geometry(..)
   ) where
 
-data Geometry = Transform Int Int Int Geometry | Cube Int Int Int
+data Geometry = Transform Int Int Int Geometry | Cube Int Int Int | Empty
 
 makeCube :: Int -> Int -> Int -> Geometry
 makeCube width depth height = Cube width depth height

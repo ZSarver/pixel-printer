@@ -35,9 +35,9 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && < 5,
-      JuicyPixels >= 3.3 && < 3.4,
-      lens >= 4.19 && < 5
+      base >=4.7 && < 5
+    , JuicyPixels >= 3.3 && < 3.4
+    , lens >= 4.19 && < 5
   default-language: Haskell2010
 
 executable pixel-printer-exe
@@ -50,6 +50,7 @@ executable pixel-printer-exe
   build-depends:
       base >=4.7 && <5
     , pixel-printer
+    , JuicyPixels >= 3.3 && < 3.4
   default-language: Haskell2010
 
 test-suite pixel-printer-test
