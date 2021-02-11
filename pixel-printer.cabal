@@ -1,25 +1,21 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.33.0.
---
--- see: https://github.com/sol/hpack
---
--- hash: 7dde5246e251bb28682e5cf335c48523a71ce2fe127731720b534886f4e6367e
-
 name:           pixel-printer
-version:        0.1.0.0
+version:        0.1.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/pixel-printer#readme>
 homepage:       https://github.com/githubuser/pixel-printer#readme
 bug-reports:    https://github.com/githubuser/pixel-printer/issues
 author:         Zachary Sarver
 maintainer:     Zachary.Sarver@gmail.com
 copyright:      2021 Zachary Sarver
-license:        GPLv3
+license:        GPL-3
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
     ChangeLog.md
+category: Image
+synopsis: A program for turning pixel art into 3D prints
 
 source-repository head
   type: git

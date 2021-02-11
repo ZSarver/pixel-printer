@@ -22,5 +22,7 @@ Any filetype supported by
 - [ ] v0.3 - stl output
     - [ ] ascii
     - [ ] binary
+- [ ] v0.4 - Presets
+    - [ ] lithophane mode
 - [ ] v1.0 - same height pixel output, useful for painting the final product
     - [ ] paint by pixels
