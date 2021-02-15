@@ -1,13 +1,22 @@
+{- |
+Module      : PixelTransform
+Description : Transforms image data into geometry
+Copyright   : (c) Zachary Sarver, 2021
+License     : GPL-3
+Maintainer  : Zachary.Sarver@gmail.com
+
+Transforms RGB8 image data into geometry, where each pixel is transformed into a
+square prism, where length and width are fixed and heigh is determined by pixel
+brightness.
+-}
 module PixelTransform
     ( geomImage
     ) where
 
-import Codec.Picture ( DynamicImage(..)
-                     , Image(..)
+import Codec.Picture ( Image(..)
                      , PixelRGB8(..)
                      , Pixel8(..)
                      , imageIPixels
-                     , pixelMap
                      , pixelAt
                      )
 import Geometry (Geometry(..))
@@ -32,9 +41,11 @@ logScalePixel p height = 1 + ( round $ logBase 2 (fromIntegral pp) - logBase 2 2
 geomPixel :: (Int, Int, PixelRGB8) -> PixelRGB8 -> Geometry
 geomPixel (x,y,p) transparent = if p == transparent
   then Empty
-  else Transform ( 1+x*pixelWidth ) ( 1+y*pixelLength ) 0 (Cube pixelWidth pixelLength (logScalePixel (monochrome p) pixelHeight))
-  where monochrome (PixelRGB8 r g b) = (r + g + b) `div` 3
+  else Translate ( 1+x*pixelWidth ) ( 1+y*pixelLength ) 0 (Cube pixelWidth pixelLength (logScalePixel (monochrome p) pixelHeight))
+  where monochrome (PixelRGB8 r g b) = 255 - (r + g + b) `div` 3
 
+-- | Converts an 8-bit RGB image to a list of Cubes, each cube having fixed
+-- width and depth with height varying according to pixel brightness
 geomImage :: Image PixelRGB8 -> [Geometry]
-geomImage image = fst $ mapAccumLOf imageIPixels (\acc (x,y,px) -> (geomPixel (x,y,px) transparent : acc, id px)) [] image
+geomImage image = fst $ mapAccumLOf imageIPixels (\acc (x,y,px) -> (geomPixel (x,y,px) transparent : acc, px)) [] image
   where transparent = pixelAt image 0 0
