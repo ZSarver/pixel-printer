@@ -2,9 +2,12 @@ cabal-version: 1.12
 
 name:           pixel-printer
 version:        0.1.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/pixel-printer#readme>
-homepage:       https://github.com/githubuser/pixel-printer#readme
-bug-reports:    https://github.com/githubuser/pixel-printer/issues
+
+description: Pixel-printer is a utility for turning pixel art into 3d prints.
+    You can learn more at its Github page https://github.com/ZSarver/pixel-printer#readme
+
+homepage:       https://github.com/ZSarver/pixel-printer#readme
+bug-reports:    https://github.com/ZSarver/pixel-printer/issues
 author:         Zachary Sarver
 maintainer:     Zachary.Sarver@gmail.com
 copyright:      2021 Zachary Sarver
@@ -19,7 +22,7 @@ synopsis: A program for turning pixel art into 3D prints
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/pixel-printer
+  location: https://github.com/ZSarver/pixel-printer
 
 library
   exposed-modules:
@@ -31,9 +34,9 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && < 5
+      base >= 4.13 && < 4.14
     , JuicyPixels >= 3.3 && < 3.4
-    , lens >= 4.19 && < 5
+    , lens >= 4.18 && < 4.19
   default-language: Haskell2010
 
 executable pixel-printer-exe
@@ -44,7 +47,7 @@ executable pixel-printer-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      base >= 4.13 && < 4.14
     , pixel-printer
     , JuicyPixels >= 3.3 && < 3.4
   default-language: Haskell2010
@@ -58,6 +61,6 @@ test-suite pixel-printer-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      base >= 4.13 && < 4.14
     , pixel-printer
   default-language: Haskell2010

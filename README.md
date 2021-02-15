@@ -1,5 +1,5 @@
 # pixel-printer
-A utility for turning pixel art into 3d prints
+Pixel-printer is a utility for turning pixel art into 3d prints.
 
 ## Usage
 `pixelprint filename` will output
