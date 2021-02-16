@@ -1,11 +1,15 @@
 # pixel-printer
 Pixel-printer is a utility for turning pixel art into 3d prints.
 
+## Installation
+Use `stack install pixel-printer` or `cabal install pixel-printer`
+
 ## Usage
-`pixelprint filename` will output
+`stack run filename` or `cabal run pixel-printer-exe filename` will output
 [OpenSCAD](https://www.openscad.org/index.html) code to standard out to do as
-you please. To get a file, redirect like so `pixelprint filename >
-filename.scad`. To get an STL from here, open the OpenSCAD code in OpenSCAD.
+you please. To get a file, redirect like so `stack run filename > filename.scad`
+or `cabal run pixel-printer-exe filename > filename.scad`. To get an STL from
+here, open the OpenSCAD code in OpenSCAD.
 
 Any filetype supported by
 [JuicyPixels](https://hackage.haskell.org/package/JuicyPixels) will work.
