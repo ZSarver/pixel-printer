@@ -31,10 +31,10 @@ pixelLength = 5
 pixelHeight :: Int
 pixelHeight = 100
 
-scalePixel :: Pixel8 -> Int -> Int
+scalePixel :: Int -> Int -> Int
 scalePixel p height = round $ (fromIntegral p) / 255.0 * (fromIntegral height) + 1
 
-logScalePixel :: Pixel8 -> Int -> Int
+logScalePixel :: Int -> Int -> Int
 logScalePixel p height = 1 + ( round $ logBase 2 (fromIntegral pp) - logBase 2 255.0 + logBase 2 (fromIntegral height) )
   where pp = max p 2
 
@@ -43,8 +43,8 @@ geomPixel (x,y,p) transparent invert = if p == transparent
   then Empty
   else Translate ( 1+x*pixelWidth ) ( 1+y*pixelLength ) 0 (Cube pixelWidth pixelLength (logScalePixel (monochrome p) pixelHeight))
   where monochrome (PixelRGB8 r g b) = if invert
-          then (r + g + b) `div` 3
-          else 255 - (r + g + b) `div` 3
+          then (fromIntegral r + fromIntegral g + fromIntegral b) `div` 3
+          else 255 - (fromIntegral r + fromIntegral g + fromIntegral b) `div` 3
 
 -- | Converts an 8-bit RGB image to a list of Cubes, each cube having fixed
 -- width and depth with height varying according to pixel brightness
