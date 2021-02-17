@@ -31,21 +31,23 @@ pixelLength = 5
 pixelHeight :: Int
 pixelHeight = 100
 
-scalePixel :: Pixel8 -> Int -> Int
+scalePixel :: Int -> Int -> Int
 scalePixel p height = round $ (fromIntegral p) / 255.0 * (fromIntegral height) + 1
 
-logScalePixel :: Pixel8 -> Int -> Int
+logScalePixel :: Int -> Int -> Int
 logScalePixel p height = 1 + ( round $ logBase 2 (fromIntegral pp) - logBase 2 255.0 + logBase 2 (fromIntegral height) )
   where pp = max p 2
 
-geomPixel :: (Int, Int, PixelRGB8) -> PixelRGB8 -> Geometry
-geomPixel (x,y,p) transparent = if p == transparent
+geomPixel :: (Int, Int, PixelRGB8) -> PixelRGB8 -> Bool -> Geometry
+geomPixel (x,y,p) transparent invert = if p == transparent
   then Empty
   else Translate ( 1+x*pixelWidth ) ( 1+y*pixelLength ) 0 (Cube pixelWidth pixelLength (logScalePixel (monochrome p) pixelHeight))
-  where monochrome (PixelRGB8 r g b) = 255 - (r + g + b) `div` 3
+  where monochrome (PixelRGB8 r g b) = if invert
+          then (fromIntegral r + fromIntegral g + fromIntegral b) `div` 3
+          else 255 - (fromIntegral r + fromIntegral g + fromIntegral b) `div` 3
 
 -- | Converts an 8-bit RGB image to a list of Cubes, each cube having fixed
 -- width and depth with height varying according to pixel brightness
-geomImage :: Image PixelRGB8 -> [Geometry]
-geomImage image = fst $ mapAccumLOf imageIPixels (\acc (x,y,px) -> (geomPixel (x,y,px) transparent : acc, px)) [] image
+geomImage :: Bool -> Image PixelRGB8 -> [Geometry]
+geomImage invert image = fst $ mapAccumLOf imageIPixels (\acc (x,y,px) -> (geomPixel (x,y,px) transparent invert : acc, px)) [] image
   where transparent = pixelAt image 0 0
