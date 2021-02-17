@@ -18,7 +18,7 @@ Any filetype supported by
 - [x] v0.1 - Reads file given on command line, outputs .scad code to stdout.
       Height, width, length predefined
 - [ ] v0.2 - Command line options for:
-    - [ ] invert height
+    - [x] invert height
     - [ ] pixel width, pixel length, mutally exclusive with
     - [ ] total width, total length
     - [ ] height

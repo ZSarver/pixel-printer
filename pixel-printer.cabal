@@ -1,7 +1,7 @@
 cabal-version: 1.12
 
 name:           pixel-printer
-version:        0.1.0
+version:        0.1.1
 description:    Pixel-printer is a utility for turning pixel art into 3d prints.
 homepage:       https://github.com/ZSarver/pixel-printer#readme
 bug-reports:    https://github.com/ZSarver/pixel-printer/issues
