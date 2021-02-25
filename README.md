@@ -20,7 +20,7 @@ Any filetype supported by
 - [ ] v0.2 - Command line options for:
     - [x] invert height
     - [ ] pixel width, pixel length, mutally exclusive with
-    - [ ] total width, total length
+    - [x] total width, total length
     - [ ] height
     - [ ] output to a file
 - [ ] v0.3 - stl output

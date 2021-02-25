@@ -16,8 +16,8 @@ module Geometry
 -- | Represents primitive 3d geometry from which to construct 3d prints
 data Geometry =
   -- | Represents geometry that is translated by x y z
-  Translate Int Int Int Geometry
+  Translate Double Double Double Geometry
   -- | Represents a cube with width, depth, and height
-  | Cube Int Int Int
+  | Cube Double Double Double
   -- | Empty geometry
   | Empty

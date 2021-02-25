@@ -22,32 +22,36 @@ import Codec.Picture ( Image(..)
 import Geometry (Geometry(..))
 import Control.Lens.Traversal(mapAccumLOf)
 
-pixelWidth :: Int
-pixelWidth = 5
+import qualified Options.Output as PO
 
-pixelLength :: Int
-pixelLength = 5
-
-pixelHeight :: Int
+pixelHeight :: Double
 pixelHeight = 100
 
-scalePixel :: Int -> Int -> Int
-scalePixel p height = round $ (fromIntegral p) / 255.0 * (fromIntegral height) + 1
+scalePixel :: Double -> Double -> Double
+scalePixel p height = p / 255.0 * height + 1
 
-logScalePixel :: Int -> Int -> Int
-logScalePixel p height = 1 + ( round $ logBase 2 (fromIntegral pp) - logBase 2 255.0 + logBase 2 (fromIntegral height) )
+logScalePixel :: Double -> Double -> Double
+logScalePixel p height = 1 + logBase 2 pp - logBase 2 255.0 + logBase 2 height
   where pp = max p 2
 
-geomPixel :: (Int, Int, PixelRGB8) -> PixelRGB8 -> Bool -> Geometry
-geomPixel (x,y,p) transparent invert = if p == transparent
+monochrome :: PixelRGB8 -> Bool -> Double
+monochrome (PixelRGB8 r g b) invert = if invert
+          then (fromIntegral r + fromIntegral g + fromIntegral b) / 3.0
+          else 255.0 - (fromIntegral r + fromIntegral g + fromIntegral b) / 3.0
+
+geomPixel :: Int -> Int -> (Int, Int, PixelRGB8) -> PixelRGB8 -> PO.PrintOptions -> Geometry
+geomPixel iw il (x,y,p) transparent options = if p == transparent
   then Empty
-  else Translate ( 1+x*pixelWidth ) ( 1+y*pixelLength ) 0 (Cube pixelWidth pixelLength (logScalePixel (monochrome p) pixelHeight))
-  where monochrome (PixelRGB8 r g b) = if invert
-          then (fromIntegral r + fromIntegral g + fromIntegral b) `div` 3
-          else 255 - (fromIntegral r + fromIntegral g + fromIntegral b) `div` 3
+  else Translate
+       (1+(fromIntegral x)*pixelWidth)
+       (1+(fromIntegral y)*pixelLength)
+       0
+       (Cube pixelWidth pixelLength (logScalePixel (monochrome p (PO.invert options)) pixelHeight))
+  where pixelLength = PO.length options / (fromIntegral il)
+        pixelWidth = PO.width options / (fromIntegral iw)
 
 -- | Converts an 8-bit RGB image to a list of Cubes, each cube having fixed
 -- width and depth with height varying according to pixel brightness
-geomImage :: Bool -> Image PixelRGB8 -> [Geometry]
-geomImage invert image = fst $ mapAccumLOf imageIPixels (\acc (x,y,px) -> (geomPixel (x,y,px) transparent invert : acc, px)) [] image
+geomImage :: PO.PrintOptions -> Image PixelRGB8 -> [Geometry]
+geomImage options image = fst $ mapAccumLOf imageIPixels (\acc (x,y,px) -> (geomPixel (imageWidth image) (imageHeight image) (x,y,px) transparent options : acc, px)) [] image
   where transparent = pixelAt image 0 0
