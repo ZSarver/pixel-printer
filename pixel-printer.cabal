@@ -1,4 +1,4 @@
-cabal-version: 1.12
+cabal-version: 2.2
 
 name:           pixel-printer
 version:        0.1.2
@@ -8,7 +8,7 @@ bug-reports:    https://github.com/ZSarver/pixel-printer/issues
 author:         Zachary Sarver
 maintainer:     Zachary.Sarver@gmail.com
 copyright:      2021 Zachary Sarver
-license:        GPL-3
+license:        GPL-3.0-only
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
@@ -43,7 +43,6 @@ executable pixel-printer-exe
       Paths_pixel_printer
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base
     , pixel-printer
