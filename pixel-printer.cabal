@@ -29,6 +29,8 @@ library
       Options.Output
   other-modules:
       Paths_pixel_printer
+  autogen-modules:
+      Paths_pixel_printer
   hs-source-dirs:
       src
   build-depends:
@@ -40,6 +42,8 @@ library
 executable pixel-printer-exe
   main-is: Main.hs
   other-modules:
+      Paths_pixel_printer
+  autogen-modules:
       Paths_pixel_printer
   hs-source-dirs:
       app
@@ -54,6 +58,8 @@ test-suite pixel-printer-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Paths_pixel_printer
+  autogen-modules:
       Paths_pixel_printer
   hs-source-dirs:
       test
