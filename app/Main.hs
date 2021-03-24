@@ -5,9 +5,7 @@ import Codec.Picture ( Image(..)
                      , readImage
                      , convertRGB8
                      )
-import Data.Semigroup((<>))
 import Options.Applicative
-import System.Environment (getArgs)
 
 import Options.Output (PrintOptions(..))
 import PixelTransform (geomImage)
@@ -44,7 +42,7 @@ main :: IO ()
 main = do
   options <- execParser printOptionsInfo
   eitherImage <- readImage $ filename options
-  either (putStrLn) (putStrLn . (getScadCode $ options) . convertRGB8) eitherImage
+  either putStrLn (putStrLn . getScadCode options . convertRGB8) eitherImage
 
 getScadCode :: PrintOptions -> Image PixelRGB8 -> String
-getScadCode po = scadify . (geomImage po)
+getScadCode po = scadify . geomImage po

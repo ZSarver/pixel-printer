@@ -31,4 +31,4 @@ scadifyGeometry Empty = ""
 -- Geometry in a union() block
 scadify :: [Geometry] -> String
 scadify image = "union() {\n" <> scadify' <> "};"
-  where scadify' = (foldr (<>) "") . (map scadifyGeometry) $ image
+  where scadify' = foldr ((<>) . scadifyGeometry) "" image
