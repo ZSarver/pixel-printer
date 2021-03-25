@@ -14,6 +14,10 @@ here, open the OpenSCAD code in OpenSCAD.
 Any filetype supported by
 [JuicyPixels](https://hackage.haskell.org/package/JuicyPixels) will work.
 
+You can get more information about supported command line options with `stack
+run -- --help`. These command line options allow you to e.g. set the width of
+the final output with `stack run -- --width 42 filename > filename.scad`.
+
 ## Roadmap
 - [x] v0.1 - Reads file given on command line, outputs .scad code to stdout.
       Height, width, length predefined
@@ -21,7 +25,7 @@ Any filetype supported by
     - [x] invert height
     - [ ] pixel width, pixel length, mutally exclusive with
     - [x] total width, total length
-    - [ ] height
+    - [x] height
     - [ ] output to a file
 - [ ] v0.3 - stl output
     - [ ] ascii
