@@ -23,9 +23,6 @@ import Control.Lens.Traversal(mapAccumLOf)
 
 import qualified Options.Output as PO
 
-pixelHeight :: Double
-pixelHeight = 100
-
 logScalePixel :: Double -> Double -> Double
 logScalePixel p height = 1 + logBase 2 pp - logBase 2 255.0 + logBase 2 height
   where pp = max p 2
@@ -45,6 +42,7 @@ geomPixel iw il (x,y,p) transparent options = if p == transparent
        (Cube pixelWidth pixelLength (logScalePixel (monochrome p (PO.invert options)) pixelHeight))
   where pixelLength = PO.length options / fromIntegral il
         pixelWidth = PO.width options / fromIntegral iw
+        pixelHeight = 2 ** PO.height options -- we want user input to scale linearly, so we exponentiate by 2 to offset taking log 2 later
 
 -- | Converts an 8-bit RGB image to a list of Cubes, each cube having fixed
 -- width and depth with height varying according to pixel brightness

@@ -31,6 +31,14 @@ printOptions = PrintOptions
                   <> metavar "WIDTH"
                   <> value 100
                   <> showDefault)
+               <*> option auto
+                  ( long "height"
+                  <> short 'h'
+                  <> help "Sets the maximum height of the output - pixels will be scaled to this height based on brightness."
+                  <> metavar "HEIGHT"
+                  <> value 10
+                  <> showDefault
+                  )
                <*> strArgument (metavar "FILE")
 
 printOptionsInfo :: ParserInfo PrintOptions
