@@ -5,9 +5,7 @@ import Codec.Picture ( Image(..)
                      , readImage
                      , convertRGB8
                      )
-import Data.Semigroup((<>))
 import Options.Applicative
-import System.Environment (getArgs)
 
 import Options.Output (PrintOptions(..))
 import PixelTransform (geomImage)
@@ -33,6 +31,14 @@ printOptions = PrintOptions
                   <> metavar "WIDTH"
                   <> value 100
                   <> showDefault)
+               <*> option auto
+                  ( long "height"
+                  <> short 'h'
+                  <> help "Sets the maximum height of the output - pixels will be scaled to this height based on brightness."
+                  <> metavar "HEIGHT"
+                  <> value 10
+                  <> showDefault
+                  )
                <*> strArgument (metavar "FILE")
 
 printOptionsInfo :: ParserInfo PrintOptions
@@ -44,7 +50,7 @@ main :: IO ()
 main = do
   options <- execParser printOptionsInfo
   eitherImage <- readImage $ filename options
-  either (putStrLn) (putStrLn . (getScadCode $ options) . convertRGB8) eitherImage
+  either putStrLn (putStrLn . getScadCode options . convertRGB8) eitherImage
 
 getScadCode :: PrintOptions -> Image PixelRGB8 -> String
-getScadCode po = scadify . (geomImage po)
+getScadCode po = scadify . geomImage po
