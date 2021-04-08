@@ -6,8 +6,9 @@ import Codec.Picture ( Image(..)
                      , convertRGB8
                      )
 import Options.Applicative
+import System.IO
 
-import Options.Output (PrintOptions(..))
+import Options.Output ( PrintOptions(..) )
 import PixelTransform (geomImage)
 import Scad (scadify)
 
@@ -39,6 +40,14 @@ printOptions = PrintOptions
                   <> value 10
                   <> showDefault
                   )
+               <*> option str
+                  ( long "output"
+                  <> short 'o'
+                  <> help "Path of the output file - without this output will be stdout."
+                  <> metavar "PATH"
+                  <> value "out.scad"
+                  <> showDefault
+                  )
                <*> strArgument (metavar "FILE")
 
 printOptionsInfo :: ParserInfo PrintOptions
@@ -50,7 +59,9 @@ main :: IO ()
 main = do
   options <- execParser printOptionsInfo
   eitherImage <- readImage $ filename options
-  either putStrLn (putStrLn . getScadCode options . convertRGB8) eitherImage
+  withFile (output options) WriteMode
+    $ \h -> do
+        either putStrLn (hPutStrLn h . getScadCode options . convertRGB8) eitherImage
 
 getScadCode :: PrintOptions -> Image PixelRGB8 -> String
 getScadCode po = scadify . geomImage po

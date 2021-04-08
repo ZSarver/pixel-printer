@@ -23,7 +23,6 @@ the final output with `stack run -- --width 42 filename > filename.scad`.
       Height, width, length predefined
 - [ ] v0.2 - Command line options for:
     - [x] invert height
-    - [ ] pixel width, pixel length, mutally exclusive with
     - [x] total width, total length
     - [x] height
     - [ ] output to a file
