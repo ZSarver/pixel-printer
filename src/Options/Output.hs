@@ -1,7 +1,9 @@
-module Options.Output (PrintOptions(..)) where
+module Options.Output where
 data PrintOptions = PrintOptions
   { invert :: Bool
   , length :: Double
   , width :: Double
   , height :: Double
-  , filename :: String}
+  , output :: String
+  , filename :: String
+  }
