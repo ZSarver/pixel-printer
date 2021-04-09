@@ -1,7 +1,7 @@
 cabal-version: 2.2
 
 name:           pixel-printer
-version:        0.2.0
+version:        0.1.4
 description:    Pixel-printer is a utility for turning pixel art into 3d prints.
 homepage:       https://github.com/ZSarver/pixel-printer#readme
 bug-reports:    https://github.com/ZSarver/pixel-printer/issues
@@ -39,7 +39,7 @@ library
     , lens >= 4.18 && < 4.19
   default-language: Haskell2010
 
-executable pixel-printer-exe
+executable pixel-printer
   main-is: Main.hs
   other-modules:
       Paths_pixel_printer
