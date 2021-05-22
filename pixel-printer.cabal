@@ -26,7 +26,8 @@ library
       PixelTransform,
       Geometry,
       Scad,
-      Options.Output
+      Options.Output,
+      Stl
   other-modules:
       Paths_pixel_printer
   autogen-modules:
@@ -37,6 +38,7 @@ library
       base >= 4.13 && < 4.14
     , JuicyPixels >= 3.3 && < 3.4
     , lens >= 4.18 && < 4.19
+    , binary >= 0.8.7 && < 0.9
   default-language: Haskell2010
 
 executable pixel-printer
